@@ -1,20 +1,34 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import api from "streamscraper/api";
 
-class GamesContainer extends Component {
-  async componentDidMount() {
-    const { sport } = this.props;
-    console.log(api);
-    const games = await api.getGameLinks(
-      `https://www.reddit.com/r/${sport}streams`
-    );
-    console.log(games);
-  }
+const renderGameLink = (key, link, name) => {
+  return (
+    <li key={key}>
+      <a href={link}>{name}</a>
+    </li>
+  );
+};
 
-  render() {
-    console.log(this.props);
-    return <div>This is the games container</div>;
-  }
-}
+const GamesContainer = ({ sport }) => {
+  const [games, setGames] = useState({});
+
+  // NOTE: componentDidMount
+  useEffect(() => {
+    api
+      .getGameLinks(`https://www.reddit.com/r/${sport}streams`)
+      .then(newGames => setGames(newGames));
+  }, []);
+
+  return (
+    <div>
+      <h2>This is the games container</h2>
+      <ul>
+        {Object.keys(games).map((key, index) =>
+          renderGameLink(index, games[key], key)
+        )}
+      </ul>
+    </div>
+  );
+};
 
 export default GamesContainer;

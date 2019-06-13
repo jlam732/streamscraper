@@ -7,10 +7,6 @@ const app = express();
 
 app.use(morgan("common"));
 app.use(helmet());
-app.use((req, res, next) => {
-  console.log("hi");
-  next();
-});
 // app.use(
 //   cors({
 //     // origin: ["http://localhost:3001"],

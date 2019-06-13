@@ -10,7 +10,6 @@ const isRelativeUrl = url => {
 const CrawlUtils = {
   // returns { [url text] : [url link]}
   getUrlLinks: async (websiteUrl, selector, requestOptions = {}) => {
-    console.log(websiteUrl, selector);
     if (!websiteUrl || !selector)
       return Promise.reject("url or selector must be provided");
     return request({
