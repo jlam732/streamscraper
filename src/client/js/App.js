@@ -7,6 +7,8 @@ const App = () => {
     <div>
       <h1>Links</h1>
       <GameList sport="mlb" />
+      <GameList sport="nba" />
+      <GameList sport="nhl" />
     </div>
   );
 };

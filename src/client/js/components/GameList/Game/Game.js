@@ -3,9 +3,23 @@ import api from "streamscraper/api";
 
 import Stream from "./Stream/Stream";
 
+const renderStreamList = streams => {
+  if (streams === null) return <p>Loading...</p>;
+  if (Object.keys(streams).length === 0) {
+    return <p>No streams posted</p>;
+  }
+  return (
+    <ul>
+      {Object.keys(streams).map((title, index) => (
+        <Stream key={index} name={title} url={streams[title]} />
+      ))}
+    </ul>
+  );
+};
+
 const Game = ({ name, url }) => {
   const [open, setOpen] = useState(false);
-  const [streams, setStreams] = useState({});
+  const [streams, setStreams] = useState(null);
 
   useEffect(() => {
     if (open) {
@@ -24,12 +38,7 @@ const Game = ({ name, url }) => {
         </h4>
       </div>
       <div style={{ display: open ? "block" : "none" }}>
-        <p>this is open</p>
-        <ul>
-          {Object.keys(streams).map((title, index) => (
-            <Stream key={index} name={title} url={streams[title]} />
-          ))}
-        </ul>
+        {renderStreamList(streams)}
       </div>
     </li>
   );
