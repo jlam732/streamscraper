@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
 import api from "streamscraper/api";
 
-const renderGameLink = (key, link, name) => {
-  return (
-    <li key={key}>
-      <a href={link}>{name}</a>
-    </li>
-  );
-};
+import Game from "./Game/Game";
 
-const GamesContainer = ({ sport }) => {
+const GameList = ({ sport }) => {
   const [games, setGames] = useState({});
 
   // NOTE: componentDidMount
@@ -23,12 +17,12 @@ const GamesContainer = ({ sport }) => {
     <div>
       <h2>This is the games container</h2>
       <ul>
-        {Object.keys(games).map((key, index) =>
-          renderGameLink(index, games[key], key)
-        )}
+        {Object.keys(games).map((key, index) => (
+          <Game key={index} name={key} url={games[key]} />
+        ))}
       </ul>
     </div>
   );
 };
 
-export default GamesContainer;
+export default GameList;

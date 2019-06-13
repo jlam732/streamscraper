@@ -13,6 +13,16 @@ const Api = {
       method: "GET"
     });
     return await response.json();
+  },
+
+  async getStreamLinks(url) {
+    const query = `?${getQueryString({
+      url
+    })}`;
+    let response = await fetch(`/api/streams${query}`, {
+      method: "GET"
+    });
+    return await response.json();
   }
 };
 

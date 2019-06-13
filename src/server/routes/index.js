@@ -5,10 +5,13 @@ const CrawlSelectors = require("../constants/CrawlSelectors");
 
 router.get("/games", async (req, res) => {
   const { url } = req.query;
-  const links = await CrawlUtils.getUrlLinks(
-    decodeURIComponent(url),
-    CrawlSelectors.GAME_LINKS
-  );
+  const links = await CrawlUtils.getGameLinks(decodeURIComponent(url));
+  res.send(links);
+});
+
+router.get("/streams", async (req, res) => {
+  const { url } = req.query;
+  const links = await CrawlUtils.getStreamLinks(decodeURIComponent(url));
   res.send(links);
 });
 
